@@ -5,17 +5,21 @@ import { connect } from 'react-redux'
 
 import { addField } from '../../redux/currentModel'
 import Field from './Field'
-import RaisedButton from 'material-ui/RaisedButton'
-import Paper from 'material-ui/Paper'
+
+
+import { Button } from 'react-toolbox/lib/button'
+import { Card } from 'react-toolbox/lib/card'
+
 
 export class Fields extends Component {
   render() {
     let { currentModel, createField } = this.props
     return (
-      <Paper id='fields-paper'>
+      <Card id='fields-paper'>
         <div id='create-field-header'>
           <span id='create-field-title'>Fields</span>
-          <RaisedButton
+          <Button
+            raised
             primary={true}
             label='+ ADD'
             onClick={createField}
@@ -30,7 +34,7 @@ export class Fields extends Component {
               />
           ))}
         </div>
-      </Paper>
+      </Card>
     )
   }
 }

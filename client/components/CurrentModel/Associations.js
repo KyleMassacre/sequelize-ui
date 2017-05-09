@@ -34,7 +34,7 @@ const dataTypes = [
   {label: 'UUID', value: 'UUID'},
 ]
 
-import Dropdown from 'react-toolbox/lib/dropdown';
+import Dropdown from 'react-toolbox/lib/dropdown'
 import { Button } from 'react-toolbox/lib/button'
 import Input from 'react-toolbox/lib/input'
 import { List, ListItem, ListSubHeader } from 'react-toolbox/lib/list'

@@ -58,7 +58,7 @@ export class ModelToolBar extends Component {
 }
 
 
-const mapStateToProps = ({ currentModel }) => ({ currentModel })
+const mapStateToProps = state => state
 const mapDispatchToProps = dispatch => ({
   saveModel: (model, isNew) => dispatch(saveModel(model, isNew)),
   updateModelName: name => dispatch(setModelName(name)),
