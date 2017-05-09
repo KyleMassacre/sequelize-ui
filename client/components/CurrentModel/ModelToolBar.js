@@ -6,10 +6,8 @@ import { connect } from 'react-redux'
 import { saveModel, removeModel } from '../../redux/models'
 import { resetModel, setModelName } from '../../redux/currentModel'
 
-import TextField from 'material-ui/TextField'
-import RaisedButton from 'material-ui/RaisedButton'
-import { Toolbar, ToolbarGroup, ToolbarSeparator } from 'material-ui/Toolbar'
-import { red400, white, blueGrey200} from 'material-ui/styles/colors'
+import { Button } from 'react-toolbox/lib/button'
+import Input from 'react-toolbox/lib/input'
 
 
 export class ModelToolBar extends Component {
@@ -19,47 +17,42 @@ export class ModelToolBar extends Component {
           saveModel,
           deleteModel } = this.props
     return (
-      <Toolbar>
-        <ToolbarGroup firstChild={true}>
-        <ToolbarSeparator />
+      <div>
         <div className='model-name-input'>
-          <TextField
+          <Input
             value={currentModel.name}
             style={{
               fontSize: '1.5em'
             }}
-            onChange={(evt) => updateModelName(evt.target.value)}
-            hintText='Model Name'
-            hintStyle={{color: '#555'}}
+            onChange={updateModelName}
+            hint='Model Name'
           />
         </div>
-        <ToolbarSeparator />
         { currentModel.id &&
-            <RaisedButton
+            <Button
+              raised
               label='Save'
               primary={true}
               onClick={() => saveModel(currentModel, false)}
             />
         }
         { currentModel.id &&
-          <RaisedButton
+          <Button
+            raised
+            inverse
             label='Delete'
-            labelColor={white}
-            backgroundColor={red400}
             onClick={() => deleteModel(currentModel)}
           />
         }
         { !currentModel.id &&
-            <RaisedButton
+            <Button
+              raised
               label='Create'
               disabled={!currentModel.name}
-              disabledBackgroundColor={blueGrey200}
-              secondary={true}
               onClick={() => saveModel(currentModel, true)}
             />
         }
-        </ToolbarGroup>
-      </Toolbar>
+      </div>
     )
   }
 }
