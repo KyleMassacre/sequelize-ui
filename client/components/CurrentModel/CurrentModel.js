@@ -7,9 +7,8 @@ import ModelToolBar from './ModelToolBar'
 import Fields from './Fields'
 import Configuration from './Configuration'
 import Associations from './Associations'
-import Paper from 'material-ui/Paper'
 
-import {Tabs, Tab} from 'material-ui/Tabs'
+import {Tab, Tabs} from 'react-toolbox'
 
 
 export class CurrentModel extends Component {
@@ -25,44 +24,29 @@ export class CurrentModel extends Component {
 
   render() {
     return (
-      <Paper>
+      <div>
         <ModelToolBar />
         <Tabs
           id='current-model-tabs'
-          value={this.state.tabIdx}
+          index={this.state.tabIdx}
+          onChange={idx => this.setTabIdx(idx)}
         >
-          <Tab
-            label='Fields'
-            value={0}
-            onClick={() => this.setTabIdx(0)}
-          >
+          <Tab label='Fields'>
             <Fields />
           </Tab>
-          <Tab
-            label='Configuration'
-            value={1}
-            onClick={() => this.setTabIdx(1)}
-          >
+          <Tab label='Configuration'>
             <Configuration />
           </Tab>
-          <Tab
-            label='Associations'
-            value={2}
-            onClick={() => this.setTabIdx(2)}
-          >
+          <Tab label='Associations'>
             <Associations />
           </Tab>
         </Tabs>
-      </Paper>
+      </div>
     )
   }
 }
 
 
-const mapStateToProps = ({ models }) => ({ models })
-const mapDispatchToProps = dispatch => ({})
+const mapStateToProps = state => state
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CurrentModel)
+export default connect(mapStateToProps)(CurrentModel)
