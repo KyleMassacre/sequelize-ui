@@ -4,6 +4,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { find } from 'lodash'
 
+import Dropdown from 'react-toolbox/lib/dropdown';
+
 /*----------  LIBRARY COMPONENTS  ----------*/
 import IconMenu from 'material-ui/IconMenu'
 import MenuItem from 'material-ui/MenuItem'
@@ -11,10 +13,10 @@ import FlatButton from 'material-ui/FlatButton'
 
 /*----------  CONSTANTS  ----------*/
 const relationships = [
-  {textKey: 'Belongs To', valueKey: 'belongsTo'},
-  {textKey: 'Has One', valueKey: 'hasOne'},
-  {textKey: 'Has Many', valueKey: 'hasMany'},
-  {textKey: 'Belongs To Many', valueKey: 'belongsToMany'},
+  {label: 'Belongs To', value: 'belongsTo'},
+  {label: 'Has One', value: 'hasOne'},
+  {label: 'Has Many', value: 'hasMany'},
+  {label: 'Belongs To Many', value: 'belongsToMany'},
 ]
 
 /*----------  COMPONENT  ----------*/

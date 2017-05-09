@@ -2,26 +2,43 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
-/*----------  ACTION/THUNK CREATORS  ----------*/
 import { addAssociation,
          updateTarget,
          updateRelationship,
          updateAssociationConfig,
          removeAssociation } from '../../redux/currentModel'
 
-import { List, ListItem } from 'material-ui/List'
-import RelationshipDropDown from './RelationshipDropDown'
-import ModelDropDown from './ModelDropDown'
-import RaisedButton from 'material-ui/RaisedButton'
-import FlatButton from 'material-ui/FlatButton'
+
+const relationships = [
+  {label: 'Belongs To', value: 'belongsTo'},
+  {label: 'Has One', value: 'hasOne'},
+  {label: 'Has Many', value: 'hasMany'},
+  {label: 'Belongs To Many', value: 'belongsToMany'},
+]
 
 
-/*----------  LIBRARY COMPONENTS  ----------*/
-import Paper from 'material-ui/Paper'
-import Subheader from 'material-ui/Subheader'
-import TextField from 'material-ui/TextField'
-import { red400 } from 'material-ui/styles/colors'
+const dataTypes = [
+  {label: 'String', value: 'STRING'},
+  {label: 'Text', value: 'TEXT'},
+  {label: 'Integer', value: 'INTEGER'},
+  {label: 'Float', value: 'FLOAT'},
+  {label: 'Real', value: 'REAL'},
+  {label: 'Double', value: 'DOUBLE'},
+  {label: 'Decimal', value: 'DECIMAL'},
+  {label: 'Date', value: 'DATE'},
+  {label: 'Date (without time)', value: 'DATEONLY'},
+  {label: 'Boolean', value: 'BOOLEAN'},
+  {label: 'Array', value: 'ARRAY'},
+  {label: 'JSON', value: 'JSON'},
+  {label: 'BLOB', value: 'BLOB'},
+  {label: 'UUID', value: 'UUID'},
+]
+
+import Dropdown from 'react-toolbox/lib/dropdown';
+import { Button } from 'react-toolbox/lib/button'
+import Input from 'react-toolbox/lib/input'
+import { List, ListItem, ListSubHeader } from 'react-toolbox/lib/list'
+import { Card } from 'react-toolbox/lib/card'
 
 /*----------  COMPONENT  ----------*/
 export class Associations extends Component {
@@ -36,56 +53,62 @@ export class Associations extends Component {
           updateAssociationConfig,
           deleteAssociation } = this.props
     return (
-      <Paper className='associations-paper'>
+      <Card className='associations-paper'>
         <div className='associations container'>
-        <Subheader>Model Associations</Subheader>
-        <RaisedButton primary={true} label='+ ADD' onClick={createAssociation} />
-      <List>
-        { currentModel
-            .associations
-            .map((association, idx) => (
-              <ListItem
-                key={idx}
-                hoverColor='#ffffff'
-                className='association-item'
-              >
-                <RelationshipDropDown
-                  idx={idx}
-                  valueKey={currentModel.associations[idx].relationship}
-                  onClick={updateRelationship}
-                />
-                <ModelDropDown
-                  idx={idx}
-                  valueKey={currentModel.associations[idx].target}
-                  onClick={updateTarget}
-                />
-                &nbspas&nbsp
-                <TextField
-                  value={currentModel.associations[idx].config.as}
-                  className='as-field'
-                  inputStyle={{textAlign: 'center'}}
-                  onChange={evt => updateAssociationConfig('as', evt.target.value, idx)}
-                  type='text'
-                />
-                &nbspthrough&nbsp
-                <TextField
-                  value={currentModel.associations[idx].config.through}
-                  className='through-field'
-                  inputStyle={{textAlign: 'center'}}
-                  onChange={evt => updateAssociationConfig('through', evt.target.value, idx)}
-                  type='text'
-                />
-                <FlatButton
-                  label='DELETE'
-                  labelStyle={{ color: red400 }}
-                  onClick={() => deleteAssociation(idx)}
-                />
-              </ListItem>
-            ))
-        }
-      </List>
+          <ListSubHeader caption='Model Associations' />
+          <Button
+            raised
+            primary={true}
+            label='+ ADD'
+            onClick={createAssociation}
+          />
+          <List>
+            { currentModel
+                .associations
+                .map((association, idx) => (
+                  <ListItem
+                    key={idx}
+                    className='association-item'
+                  >
+                    <Dropdown
+                      auto
+                      onChange={val => updateRelationship(val, idx)}
+                      source={relationships}
+                      value={currentModel.associations[idx].relationship}
+                    />
+                    <Dropdown
+                      auto
+                      onChange={value => updateTarget(value, idx)}
+                      source={dataTypes}
+                      value={currentModel.associations[idx].target}
+                    />
+                    &nbsp;a&nbsp;
+                    <Input
+                      value={currentModel.associations[idx].config.as}
+                      className='as-field'
+                      style={{textAlign: 'center'}}
+                      onChange={value => updateAssociationConfig('as', value, idx)}
+                      type='text'
+                    />
+                    &nbsp;through&nbsp;
+                    <Input
+                      value={currentModel.associations[idx].config.through}
+                      className='through-field'
+                      style={{textAlign: 'center'}}
+                      onChange={value => updateAssociationConfig('through', value, idx)}
+                      type='text'
+                    />
+                    <Button
+                      flat
+                      label='DELETE'
+                      onClick={() => deleteAssociation(idx)}
+                    />
+                  </ListItem>
+                ))
+            }
+          </List>
         </div>
-      </Paper>
+      </Card>
     )
   }
 }
