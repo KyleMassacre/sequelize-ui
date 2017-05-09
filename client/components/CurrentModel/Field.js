@@ -11,6 +11,8 @@ import Dropdown from 'react-toolbox/lib/dropdown'
 import { Button } from 'react-toolbox/lib/button'
 import Input from 'react-toolbox/lib/input'
 import { Card, CardActions } from 'react-toolbox/lib/card'
+import Switch from 'react-toolbox/lib/switch'
+
 
 const dataTypes = [
   {label: 'String', value: 'STRING'},
@@ -29,8 +31,6 @@ const dataTypes = [
   {label: 'UUID', value: 'UUID'},
 ]
 
-
-import Toggle from 'material-ui/Toggle'
 
 const isNumber = (type) => {
   switch (type) {
@@ -80,7 +80,7 @@ class Field extends Component {
               value={field.name}
               onChange={value => updateFieldProps('name', value, idx)}
               type='text' hint='Field Name'
-        />
+            />
                 <Dropdown
                   value={field.type}
                   source={dataTypes}
@@ -91,11 +91,10 @@ class Field extends Component {
                   label='DELETE FIELD'
                   onClick={() => deleteField(idx)}
                 />
-                <Toggle
-                  onToggle={() => toggleFieldExpansion()}
-                  toggled={expanded}
+                <Switch
+                  onChange={() => toggleFieldExpansion()}
+                  checked={expanded}
                   label='More Options'
-                  labelPosition='right'
                 />
               </CardActions>
               <CardActions expandable={true}>
