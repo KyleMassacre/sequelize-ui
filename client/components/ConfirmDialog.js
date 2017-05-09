@@ -3,30 +3,24 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { closeWindow } from '../redux/dialog'
-import Dialog from 'material-ui/Dialog'
-import FlatButton from 'material-ui/FlatButton'
+import Dialog from 'react-toolbox/lib/dialog'
 
 class ConfirmDialog extends Component {
+  closeWindow = () => this.props.dispatch(closeWindow())
   render() {
     let { open, title, message } = this.props.dialog
-    let { closeWindow } = this.props
-    const actions = [
-      <FlatButton
-        label='OK'
-        secondary={true}
-        keyboardFocused={true}
-        onClick={closeWindow}
-      />,
-    ]
+    let { closeWindow } = this
+    const actions = [{ label: 'OK', onClick: () => closeWindow() }]
 
     return (
       <div>
         <Dialog
           title={title}
           actions={actions}
-          modal={false}
-          open={open}
-          onRequestClose={closeWindow}>
+          active={open}
+          onOverlayClick={closeWindow}
+          onEscKeyDown={closeWindow}
+        >
           {message}
         </Dialog>
       </div>
@@ -36,12 +30,6 @@ class ConfirmDialog extends Component {
 
 
 /*----------  CONNECT TO STORE  ----------*/
-const mapStateToProps = ({ dialog }) => ({ dialog })
-const mapDispatchToProps = dispatch => ({
-  closeWindow: () => dispatch(closeWindow())
-})
+const mapStateToProps = state => state
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ConfirmDialog)
+export default connect(mapStateToProps)(ConfirmDialog)
