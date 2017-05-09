@@ -31,7 +31,6 @@
     "file-saver": "^1.3.3",
     "lodash": "^4.16.6",
     "material-ui": "^0.18.0",
-    "materialize-css": "^0.98.2",
     "mkdirp": "^0.5.1",
     "modules-values-extract": "^1.0.3",
     "morgan": "^1.7.0",

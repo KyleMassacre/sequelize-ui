@@ -10,8 +10,6 @@ import { modelSummary } from '../../utils'
 import { ListItem, ListDivider } from 'react-toolbox/lib/list'
 import { IconButton } from 'react-toolbox/lib/button'
 
-import {grey200, teal200 } from 'material-ui/styles/colors'
-
 
 class ModelListItem extends Component {
   render() {
@@ -30,7 +28,6 @@ class ModelListItem extends Component {
           }
           style={{
             color: 'black',
-            backgroundColor: model.id === currentModel.id ? teal200 : grey200,
             opacity: model.id === currentModel.id ? 0.95 : 0.85
           }}
           caption={model.name}
