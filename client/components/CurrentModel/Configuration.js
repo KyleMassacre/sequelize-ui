@@ -2,16 +2,12 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
-/*----------  ACTION/THUNK CREATORS  ----------*/
 import { updateConfig, updateMethod } from '../../redux/currentModel'
 
-/*----------  LIBRARY COMPONENTS  ----------*/
-import TextField from 'material-ui/TextField'
-import Paper from 'material-ui/Paper'
-import Subheader from 'material-ui/Subheader'
-import Divider from 'material-ui/Divider'
-import Checkbox from 'material-ui/Checkbox'
+import Checkbox from 'react-toolbox/lib/checkbox'
+import Input from 'react-toolbox/lib/input'
+import { ListSubHeader, ListDivider } from 'react-toolbox/lib/list'
+import { Card } from 'react-toolbox/lib/card'
 
 
 /*----------  COMPONENT  ----------*/
@@ -21,13 +17,13 @@ export class Configuration extends Component {
           updateConfig,
           updateMethod } = this.props
     return (
-      <Paper className='configuration-paper'>
+      <Card className='configuration-paper'>
         <div className='configuration container'>
-        <Subheader>Table Options</Subheader>
+        <ListSubHeader caption='Table Options' />
           <div className='row'>
             <div className='col s12 m6'>
-              <TextField
-                hintText='Table Name'
+              <Input
+                hint='Table Name'
                 value={currentModel.config.tableName}
                 style={{
                   fontSize: '0.8em',
@@ -37,12 +33,10 @@ export class Configuration extends Component {
                   display: 'block',
                   clear: 'right'
                 }}
-                onChange={evt =>
-                    updateConfig('tableName', evt.target.value)
-                }
+                onChange={value => updateConfig('tableName', value)}
               />
-              <TextField
-                hintText='Singular Name'
+              <Input
+                hint='Singular Name'
                 value={currentModel.config.singular}
                 style={{
                   fontSize: '0.8em',
@@ -52,12 +46,10 @@ export class Configuration extends Component {
                   display: 'block',
                   clear: 'right'
                 }}
-                onChange={evt =>
-                  updateConfig('singular', evt.target.value)
-                }
+                onChange={value => updateConfig('singular', value)}
               />
-              <TextField
-                hintText='Plural Name'
+              <Input
+                hint='Plural Name'
                 value={currentModel.config.plural}
                 style={{
                   fontSize: '0.8em',
@@ -67,88 +59,68 @@ export class Configuration extends Component {
                   display: 'block',
                   clear: 'right'
                 }}
-                onChange={evt =>
-                    updateConfig('plural', evt.target.value)
-                }
+                onChange={value => updateConfig('plural', value)}
               />
             </div>
             <div className='col s12 m6'>
               <Checkbox
                 label='No Timestamp Columns'
                 checked={!currentModel.config.timestamps}
-                onCheck={(evt, isChecked) =>
-                  updateConfig('timestamps', !isChecked)
-                }
+                onChange={checked => updateConfig('timestamps', !checked)}
               />
               <Checkbox
                 label='Freeze Table Name'
                 checked={currentModel.config.freezeTableName}
-                onCheck={(evt, isChecked) =>
-                  updateConfig('freezeTableName', isChecked)
-                }
+                onChange={checked => updateConfig('freezeTableName', checked)}
               />
               <Checkbox
                 label='Underscore Column Names'
                 checked={currentModel.config.underscored}
-                onCheck={(evt, isChecked) =>
-                  updateConfig('underscored', isChecked)
-                }
+                onChange={checked => updateConfig('underscored', checked)}
               />
               <Checkbox
                 label='Underscore Table Names'
                 checked={currentModel.config.underscoredAll}
-                onCheck={(evt, isChecked) =>
-                  updateConfig('underscoredAll', isChecked)
-                }
+                onChange={checked => updateConfig('underscoredAll', checked)}
               />
             </div>
         </div>
-        <Divider inset={true} />
-        <Subheader>Include Templates For:</Subheader>
+        <ListDivider />
+        <ListSubHeader caption='Include Templates For:' />
         <Checkbox
           label='Hooks'
           checked={currentModel.methods.hooks}
-          onCheck={(evt, isChecked) =>
-            updateMethod('hooks', isChecked)
-          }
+          onChange={checked => updateMethod('hooks', checked)}
         />
         <Checkbox
           label='Getter Methods'
           checked={currentModel.methods.getterMethods}
-          onCheck={(evt, isChecked) =>
-            updateMethod('getterMethods', isChecked)
-          }
+          onChange={checked => updateMethod('getterMethods', checked)}
         />
         <Checkbox
           label='Setter Methods'
           checked={currentModel.methods.setterMethods}
-          onCheck={(evt, isChecked) =>
-            updateMethod('setterMethods', isChecked)
-          }
+          onChange={checked => updateMethod('setterMethods', checked)}
         />
         <Checkbox
           label='Instance Methods'
           checked={currentModel.methods.instanceMethods}
-          onCheck={(evt, isChecked) =>
-            updateMethod('instanceMethods', isChecked)
-          }
+          onChange={checked => updateMethod('instanceMethods', checked)}
         />
         <Checkbox
           label='Class Methods'
           checked={currentModel.methods.classMethods}
-          onCheck={(evt, isChecked) =>
-            updateMethod('classMethods', isChecked)
-          }
+          onChange={checked => updateMethod('classMethods', checked)}
         />
         </div>
-      </Paper>
+      </Card>
     )
   }
 }
 
 
 /*----------  CONNECT TO STORE  ----------*/
-const mapStateToProps = ({currentModel}) => ({currentModel})
+const mapStateToProps = state => state
 const mapDispatchToProps = dispatch => ({
   updateConfig: (key, val) => dispatch(updateConfig(key, val)),
   updateMethod: (key, val) => dispatch(updateMethod(key, val))
