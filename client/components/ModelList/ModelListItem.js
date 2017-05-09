@@ -7,10 +7,9 @@ import { removeModel } from '../../redux/models'
 import { receiveModel, resetModel } from '../../redux/currentModel'
 import { modelSummary } from '../../utils'
 
-import IconButton from 'material-ui/IconButton'
-import { ListItem } from 'material-ui/List'
-import Divider from 'material-ui/Divider'
-import DeleteForeverIcon from 'material-ui/svg-icons/action/delete-forever'
+import { ListItem, ListDivider } from 'react-toolbox/lib/list'
+import { IconButton } from 'react-toolbox/lib/button'
+
 import {grey200, teal200 } from 'material-ui/styles/colors'
 
 
@@ -23,21 +22,23 @@ class ModelListItem extends Component {
     return (
       <div>
         <ListItem
-          rightIconButton={
-            <IconButton onClick={() => deleteModel(model)}>
-              <DeleteForeverIcon />
-            </IconButton>
+          rightIcon={
+            <IconButton
+              icon='delete_forever'
+              onClick={() => deleteModel(model)}
+            />
           }
-          innerDivStyle={{
+          style={{
             color: 'black',
             backgroundColor: model.id === currentModel.id ? teal200 : grey200,
             opacity: model.id === currentModel.id ? 0.95 : 0.85
           }}
-          primaryText={model.name}
-          secondaryText={modelSummary(model)}
-          secondaryTextLines={1}
-          onClick={() => selectModel(model)} />
-        <Divider inset={true} />
+          caption={model.name}
+          legend={modelSummary(model)}
+          onClick={() => selectModel(model)}
+          selectable
+        />
+        <ListDivider />
       </div>
     )
   }

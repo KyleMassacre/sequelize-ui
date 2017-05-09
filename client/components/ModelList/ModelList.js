@@ -5,11 +5,12 @@ import { connect } from 'react-redux'
 
 import ModelListItem from './ModelListItem'
 
-import { List, makeSelectable } from 'material-ui/List'
-import Subheader from 'material-ui/Subheader'
+import { List, ListSubHeader } from 'react-toolbox/lib/list'
+
+// import { List, makeSelectable } from 'material-ui/List'
+// import Subheader from 'material-ui/Subheader'
 import { darkBlack } from 'material-ui/styles/colors'
 
-let SelectableList = makeSelectable(List)
 
 class ModelList extends Component {
   render() {
@@ -18,22 +19,17 @@ class ModelList extends Component {
       <div className='your-models'>
         <div className='row'>
           <div className='col s12 m6 push-m3'>
-            <SelectableList>
-              <div>
-                <h5 className='center-align' style={{color: darkBlack}}>
-                  {models.length ? 'Your Models' : 'You have no models...'}
-                </h5>
-                <Subheader className='center-align'>
-                  {models.length ? 'Click to edit' : 'Create one below'}
-                </Subheader>
-              </div>
+            <List>
+              <h5 className='center-align' style={{color: darkBlack}}>
+                {models.length ? 'Your Models' : 'You have no models...'}
+              </h5>
+              <ListSubHeader caption={models.length ? 'Click to edit' : 'Create one below'} />
               { models.map((model, idx) => {
-                console.log(model)
                 return (
                     <ModelListItem key={idx} model={model} />
                 )
                 })}
-            </SelectableList>
+            </List>
           </div>
         </div>
       </div>
@@ -41,10 +37,6 @@ class ModelList extends Component {
   }
 }
 
-const mapStateToProps = ({ models }) => ({ models })
-const mapDispatchToProps = dispatch => ({})
+const mapStateToProps = state => state
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ModelList)
+export default connect(mapStateToProps)(ModelList)
