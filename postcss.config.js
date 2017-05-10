@@ -7,7 +7,7 @@ const config = (variables) => ({
   plugins: {
     'postcss-cssnext': {
       features: {
-        customProperties: { variables }
+        // customProperties: { variables }
       }
     },
     'postcss-modules-values': {}
