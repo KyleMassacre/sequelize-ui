@@ -2,11 +2,9 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
 import { removeModel } from '../../redux/models'
 import { receiveModel, resetModel } from '../../redux/currentModel'
 import { modelSummary } from '../../utils'
-
 import { ListItem, ListDivider } from 'react-toolbox/lib/list'
 import { IconButton } from 'react-toolbox/lib/button'
 
@@ -14,7 +12,6 @@ import { IconButton } from 'react-toolbox/lib/button'
 class ModelListItem extends Component {
   render() {
     let { model,
-          currentModel,
           selectModel,
           deleteModel } = this.props
     return (
@@ -26,10 +23,6 @@ class ModelListItem extends Component {
               onClick={() => deleteModel(model)}
             />
           }
-          style={{
-            color: 'black',
-            opacity: model.id === currentModel.id ? 0.95 : 0.85
-          }}
           caption={model.name}
           legend={modelSummary(model)}
           onClick={() => selectModel(model)}

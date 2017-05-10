@@ -15,25 +15,20 @@ export class Fields extends Component {
   render() {
     let { currentModel, createField } = this.props
     return (
-      <Card id='fields-paper'>
-        <div id='create-field-header'>
-          <span id='create-field-title'>Fields</span>
-          <Button
-            raised
-            primary={true}
-            label='+ ADD'
-            onClick={createField}
-          />
-        </div>
-        <div id='fields-row row'>
-          { currentModel.fields.map( (field, idx) => (
-              <Field
-                key={idx}
-                idx={idx}
-                field={field}
-              />
-          ))}
-        </div>
+      <Card>
+        <Button
+          raised
+          primary={true}
+          label='+ ADD'
+          onClick={createField}
+        />
+        { currentModel.fields.map( (field, idx) => (
+            <Field
+              key={idx}
+              idx={idx}
+              field={field}
+            />
+        ))}
       </Card>
     )
   }

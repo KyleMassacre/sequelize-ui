@@ -53,8 +53,7 @@ export class Associations extends Component {
           updateAssociationConfig,
           deleteAssociation } = this.props
     return (
-      <Card className='associations-paper'>
-        <div className='associations container'>
+      <Card>
           <ListSubHeader caption='Model Associations' />
           <Button
             raised
@@ -66,10 +65,7 @@ export class Associations extends Component {
             { currentModel
                 .associations
                 .map((association, idx) => (
-                  <ListItem
-                    key={idx}
-                    className='association-item'
-                  >
+                  <ListItem key={idx}>
                     <Dropdown
                       auto
                       onChange={val => updateRelationship(val, idx)}
@@ -85,16 +81,12 @@ export class Associations extends Component {
                     &nbsp;a&nbsp;
                     <Input
                       value={currentModel.associations[idx].config.as}
-                      className='as-field'
-                      style={{textAlign: 'center'}}
                       onChange={value => updateAssociationConfig('as', value, idx)}
                       type='text'
                     />
                     &nbsp;through&nbsp;
                     <Input
                       value={currentModel.associations[idx].config.through}
-                      className='through-field'
-                      style={{textAlign: 'center'}}
                       onChange={value => updateAssociationConfig('through', value, idx)}
                       type='text'
                     />
@@ -107,7 +99,6 @@ export class Associations extends Component {
                 ))
             }
           </List>
-        </div>
       </Card>
     )
   }

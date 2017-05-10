@@ -17,74 +17,43 @@ export class Configuration extends Component {
           updateConfig,
           updateMethod } = this.props
     return (
-      <Card className='configuration-paper'>
-        <div className='configuration container'>
+      <Card>
         <ListSubHeader caption='Table Options' />
-          <div className='row'>
-            <div className='col s12 m6'>
-              <Input
-                hint='Table Name'
-                value={currentModel.config.tableName}
-                style={{
-                  fontSize: '0.8em',
-                  width: '50%',
-                  marginTop: -5,
-                  marginBottom: -5,
-                  display: 'block',
-                  clear: 'right'
-                }}
-                onChange={value => updateConfig('tableName', value)}
-              />
-              <Input
-                hint='Singular Name'
-                value={currentModel.config.singular}
-                style={{
-                  fontSize: '0.8em',
-                  width: '50%',
-                  marginTop: -5,
-                  marginBottom: -5,
-                  display: 'block',
-                  clear: 'right'
-                }}
-                onChange={value => updateConfig('singular', value)}
-              />
-              <Input
-                hint='Plural Name'
-                value={currentModel.config.plural}
-                style={{
-                  fontSize: '0.8em',
-                  width: '50%',
-                  marginTop: -5,
-                  marginBottom: -5,
-                  display: 'block',
-                  clear: 'right'
-                }}
-                onChange={value => updateConfig('plural', value)}
-              />
-            </div>
-            <div className='col s12 m6'>
-              <Checkbox
-                label='No Timestamp Columns'
-                checked={!currentModel.config.timestamps}
-                onChange={checked => updateConfig('timestamps', !checked)}
-              />
-              <Checkbox
-                label='Freeze Table Name'
-                checked={currentModel.config.freezeTableName}
-                onChange={checked => updateConfig('freezeTableName', checked)}
-              />
-              <Checkbox
-                label='Underscore Column Names'
-                checked={currentModel.config.underscored}
-                onChange={checked => updateConfig('underscored', checked)}
-              />
-              <Checkbox
-                label='Underscore Table Names'
-                checked={currentModel.config.underscoredAll}
-                onChange={checked => updateConfig('underscoredAll', checked)}
-              />
-            </div>
-        </div>
+          <Input
+            hint='Table Name'
+            value={currentModel.config.tableName}
+            onChange={value => updateConfig('tableName', value)}
+          />
+          <Input
+            hint='Singular Name'
+            value={currentModel.config.singular}
+            onChange={value => updateConfig('singular', value)}
+          />
+          <Input
+            hint='Plural Name'
+            value={currentModel.config.plural}
+            onChange={value => updateConfig('plural', value)}
+          />
+          <Checkbox
+            label='No Timestamp Columns'
+            checked={!currentModel.config.timestamps}
+            onChange={checked => updateConfig('timestamps', !checked)}
+          />
+          <Checkbox
+            label='Freeze Table Name'
+            checked={currentModel.config.freezeTableName}
+            onChange={checked => updateConfig('freezeTableName', checked)}
+          />
+          <Checkbox
+            label='Underscore Column Names'
+            checked={currentModel.config.underscored}
+            onChange={checked => updateConfig('underscored', checked)}
+          />
+          <Checkbox
+            label='Underscore Table Names'
+            checked={currentModel.config.underscoredAll}
+            onChange={checked => updateConfig('underscoredAll', checked)}
+          />
         <ListDivider />
         <ListSubHeader caption='Include Templates For:' />
         <Checkbox
@@ -112,7 +81,6 @@ export class Configuration extends Component {
           checked={currentModel.methods.classMethods}
           onChange={checked => updateMethod('classMethods', checked)}
         />
-        </div>
       </Card>
     )
   }

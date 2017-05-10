@@ -18,16 +18,11 @@ export class ModelToolBar extends Component {
           deleteModel } = this.props
     return (
       <div>
-        <div className='model-name-input'>
-          <Input
-            value={currentModel.name}
-            style={{
-              fontSize: '1.5em'
-            }}
-            onChange={updateModelName}
-            hint='Model Name'
-          />
-        </div>
+        <Input
+          value={currentModel.name}
+          onChange={updateModelName}
+          hint='Model Name'
+        />
         { currentModel.id &&
             <Button
               raised

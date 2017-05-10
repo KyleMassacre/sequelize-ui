@@ -27,7 +27,6 @@ export class CurrentModel extends Component {
       <div>
         <ModelToolBar />
         <Tabs
-          id='current-model-tabs'
           index={this.state.tabIdx}
           onChange={idx => this.setTabIdx(idx)}
         >

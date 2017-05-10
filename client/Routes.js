@@ -10,10 +10,10 @@ export default class Routes extends Component {
   render() {
     return (
     <Router history={browserHistory}>
-      <Route path="/" component={App}>
-        <Route path="ace" component={Ace} />
+      <Route path='/' component={App}>
+        <Route path='ace' component={Ace} />
         <IndexRoute component={Main} />
-        <Redirect from="*" to="/" />
+        <Redirect from='*' to='/' />
       </Route>
     </Router>
     )
