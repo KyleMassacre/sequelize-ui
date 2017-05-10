@@ -7,7 +7,7 @@ import { saveModel, removeModel } from '../../redux/models'
 import { resetModel, setModelName } from '../../redux/currentModel'
 
 import { Button } from 'react-toolbox/lib/button'
-import Input from 'react-toolbox/lib/input'
+import { Input } from 'react-toolbox/lib/input'
 
 
 export class ModelToolBar extends Component {

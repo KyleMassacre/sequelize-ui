@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { closeWindow } from '../redux/dialog'
-import Dialog from 'react-toolbox/lib/dialog'
+import { Dialog } from 'react-toolbox/lib/dialog'
 
 class ConfirmDialog extends Component {
   closeWindow = () => this.props.dispatch(closeWindow())

@@ -4,8 +4,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { updateConfig, updateMethod } from '../../redux/currentModel'
 
-import Checkbox from 'react-toolbox/lib/checkbox'
-import Input from 'react-toolbox/lib/input'
+import { Checkbox } from 'react-toolbox/lib/checkbox'
+import { Input } from 'react-toolbox/lib/input'
 import { ListSubHeader, ListDivider } from 'react-toolbox/lib/list'
 import { Card } from 'react-toolbox/lib/card'
 
@@ -17,7 +17,7 @@ export class Configuration extends Component {
           updateConfig,
           updateMethod } = this.props
     return (
-      <Card>
+      <div>
         <ListSubHeader caption='Table Options' />
           <Input
             hint='Table Name'
@@ -81,7 +81,7 @@ export class Configuration extends Component {
           checked={currentModel.methods.classMethods}
           onChange={checked => updateMethod('classMethods', checked)}
         />
-      </Card>
+      </div>
     )
   }
 }

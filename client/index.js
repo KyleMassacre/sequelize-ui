@@ -5,14 +5,14 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import store from './store'
 import Routes from './Routes'
-import theme from './theme'
+// import theme from './theme'
 import { ThemeProvider } from 'react-css-themr'
 
 render(
-  <ThemeProvider theme={theme}>
+  // <ThemeProvider theme={theme}>
       <Provider store={store}>
         <Routes />
-      </Provider>
-  </ThemeProvider>,
+      </Provider>,
+  // </ThemeProvider>,
   document.getElementById('app')
 )

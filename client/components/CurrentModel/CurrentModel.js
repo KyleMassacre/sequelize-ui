@@ -8,7 +8,7 @@ import Fields from './Fields'
 import Configuration from './Configuration'
 import Associations from './Associations'
 
-import {Tab, Tabs} from 'react-toolbox'
+import { Tab, Tabs } from 'react-toolbox'
 
 
 export class CurrentModel extends Component {
@@ -26,20 +26,9 @@ export class CurrentModel extends Component {
     return (
       <div>
         <ModelToolBar />
-        <Tabs
-          index={this.state.tabIdx}
-          onChange={idx => this.setTabIdx(idx)}
-        >
-          <Tab label='Fields'>
-            <Fields />
-          </Tab>
-          <Tab label='Configuration'>
-            <Configuration />
-          </Tab>
-          <Tab label='Associations'>
-            <Associations />
-          </Tab>
-        </Tabs>
+          <Fields />
+          <Configuration />
+          <Associations />
       </div>
     )
   }

@@ -10,41 +10,64 @@ import { addAssociation,
 
 
 const relationships = [
-  {label: 'Belongs To', value: 'belongsTo'},
-  {label: 'Has One', value: 'hasOne'},
-  {label: 'Has Many', value: 'hasMany'},
-  {label: 'Belongs To Many', value: 'belongsToMany'},
+  'belongsTo:',
+  'hasOne',
+  'hasMany',
+  'belongsToMany'
 ]
 
 
 const dataTypes = [
-  {label: 'String', value: 'STRING'},
-  {label: 'Text', value: 'TEXT'},
-  {label: 'Integer', value: 'INTEGER'},
-  {label: 'Float', value: 'FLOAT'},
-  {label: 'Real', value: 'REAL'},
-  {label: 'Double', value: 'DOUBLE'},
-  {label: 'Decimal', value: 'DECIMAL'},
-  {label: 'Date', value: 'DATE'},
-  {label: 'Date (without time)', value: 'DATEONLY'},
-  {label: 'Boolean', value: 'BOOLEAN'},
-  {label: 'Array', value: 'ARRAY'},
-  {label: 'JSON', value: 'JSON'},
-  {label: 'BLOB', value: 'BLOB'},
-  {label: 'UUID', value: 'UUID'},
+  'STRING',
+  'TEXT',
+  'INTEGER',
+  'FLOAT',
+  'REAL',
+  'DOUBLE',
+  'DECIMAL',
+  'DATE',
+  'DATEONLY',
+  'BOOLEAN',
+  'ARRAY',
+  'JSON',
+  'BLOB',
+  'UUID'
 ]
 
-import Dropdown from 'react-toolbox/lib/dropdown'
+// const relationships = {
+//   belongsTo: 'Belongs To',
+//   hasOne: 'Has One',
+//   hasMany: 'Has Many',
+//   belongsToMany: 'Belongs To Many',
+// }
+
+
+// const dataTypes = {
+//   STRING: 'String',
+//   TEXT: 'Text',
+//   INTEGER: 'Integer',
+//   FLOAT: 'Float',
+//   REAL: 'Real',
+//   DOUBLE: 'Double',
+//   DECIMAL: 'Decimal',
+//   DATE: 'Date',
+//   DATEONLY: 'Date (without time)',
+//   BOOLEAN: 'Boolean',
+//   ARRAY: 'Array',
+//   JSON: 'JSON',
+//   BLOB: 'BLOB',
+//   UUID: 'UUID'
+// }
+
+import { Dropdown } from 'react-toolbox/lib/dropdown'
 import { Button } from 'react-toolbox/lib/button'
-import Input from 'react-toolbox/lib/input'
+import { Input } from 'react-toolbox/lib/input'
 import { List, ListItem, ListSubHeader } from 'react-toolbox/lib/list'
 import { Card } from 'react-toolbox/lib/card'
+import { Autocomplete } from 'react-toolbox/lib/autocomplete'
 
 /*----------  COMPONENT  ----------*/
 export class Associations extends Component {
-  constructor(props) {
-    super(props)
-  }
   render() {
     let { currentModel,
           createAssociation,
@@ -53,7 +76,7 @@ export class Associations extends Component {
           updateAssociationConfig,
           deleteAssociation } = this.props
     return (
-      <Card>
+      <div>
           <ListSubHeader caption='Model Associations' />
           <Button
             raised
@@ -61,45 +84,40 @@ export class Associations extends Component {
             label='+ ADD'
             onClick={createAssociation}
           />
-          <List>
-            { currentModel
-                .associations
-                .map((association, idx) => (
-                  <ListItem key={idx}>
-                    <Dropdown
-                      auto
-                      onChange={val => updateRelationship(val, idx)}
-                      source={relationships}
-                      value={currentModel.associations[idx].relationship}
-                    />
-                    <Dropdown
-                      auto
-                      onChange={value => updateTarget(value, idx)}
-                      source={dataTypes}
-                      value={currentModel.associations[idx].target}
-                    />
-                    &nbsp;a&nbsp;
-                    <Input
-                      value={currentModel.associations[idx].config.as}
-                      onChange={value => updateAssociationConfig('as', value, idx)}
-                      type='text'
-                    />
-                    &nbsp;through&nbsp;
-                    <Input
-                      value={currentModel.associations[idx].config.through}
-                      onChange={value => updateAssociationConfig('through', value, idx)}
-                      type='text'
-                    />
-                    <Button
-                      flat
-                      label='DELETE'
-                      onClick={() => deleteAssociation(idx)}
-                    />
-                  </ListItem>
-                ))
-            }
-          </List>
-      </Card>
+          { currentModel
+              .associations
+              .map((association, idx) => (
+                <div key={idx}>
+                  <Autocomplete
+                    multiple={false}
+                    suggestionMatch='anywhere'
+                    onChange={value => updateRelationship(value, idx)}
+                    onQueryChange={console.log}
+                    source={relationships}
+                  />
+                  <Autocomplete
+                    multiple={false}
+                    suggestionMatch='anywhere'
+                    onChange={value => updateTarget(value, idx)}
+                    source={dataTypes}
+                  />
+                  <Input
+                    value={currentModel.associations[idx].config.as || ''}
+                    onChange={value => updateAssociationConfig('as', value, idx)}
+                  />
+                  <Input
+                    value={currentModel.associations[idx].config.through || ''}
+                    onChange={value => updateAssociationConfig('through', value, idx)}
+                  />
+                  <Button
+                    flat
+                    label='DELETE'
+                    onClick={() => deleteAssociation(idx)}
+                  />
+                </div>
+              ))
+          }
+      </div>
     )
   }
 }

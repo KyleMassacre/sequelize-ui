@@ -5,8 +5,8 @@ import { connect } from 'react-redux'
 import { requestDbDownload } from '../redux/models'
 
 import { Layout, Panel } from 'react-toolbox'
-import AppBar from 'react-toolbox/lib/app_bar'
-import FontIcon from 'react-toolbox/lib/font_icon'
+import { AppBar } from 'react-toolbox/lib/app_bar'
+import { FontIcon } from 'react-toolbox/lib/font_icon'
 
 export class App extends Component {
   render() {

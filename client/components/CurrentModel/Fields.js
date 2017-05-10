@@ -15,7 +15,7 @@ export class Fields extends Component {
   render() {
     let { currentModel, createField } = this.props
     return (
-      <Card>
+      <div>
         <Button
           raised
           primary={true}
@@ -29,7 +29,7 @@ export class Fields extends Component {
               field={field}
             />
         ))}
-      </Card>
+      </div>
     )
   }
 }

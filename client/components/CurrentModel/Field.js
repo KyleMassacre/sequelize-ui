@@ -6,12 +6,12 @@ import { connect } from 'react-redux'
 import { updateField, removeField, updateValidation } from '../../redux/currentModel'
 
 
-import Checkbox from 'react-toolbox/lib/checkbox'
-import Dropdown from 'react-toolbox/lib/dropdown'
+import { Checkbox } from 'react-toolbox/lib/checkbox'
+import { Dropdown } from 'react-toolbox/lib/dropdown'
 import { Button } from 'react-toolbox/lib/button'
-import Input from 'react-toolbox/lib/input'
+import { Input } from 'react-toolbox/lib/input'
 import { Card, CardTitle, CardActions } from 'react-toolbox/lib/card'
-import Switch from 'react-toolbox/lib/switch'
+import { Switch } from 'react-toolbox/lib/switch'
 
 
 const dataTypes = [
@@ -69,8 +69,7 @@ class Field extends Component {
           updateFieldValidation } = this.props
     let { expanded } = this.state
     return (
-      <Card>
-        <CardTitle>
+      <div>
           <Input
             value={field.name}
             onChange={value => updateFieldProps('name', value, idx)}
@@ -79,7 +78,7 @@ class Field extends Component {
           <Dropdown
             value={field.type}
             source={dataTypes}
-            onChange={val => updateFieldProps(val, idx)}
+            onChange={value => updateFieldProps('dataType', value, idx)}
           />
           <Button
             flat
@@ -91,13 +90,12 @@ class Field extends Component {
             checked={expanded}
             label='More Options'
           />
-        </CardTitle>
         { expanded &&
-          <CardActions>
+          <div>
             <Checkbox
               label='UNIQUE'
               checked={Boolean(field.unique)}
-              onChange={(isChecked) => updateFieldProps('unique', isChecked, idx)
+              onChange={isChecked => updateFieldProps('unique', isChecked, idx)
               }
             />
             {field.unique &&
@@ -111,23 +109,19 @@ class Field extends Component {
               <Checkbox
                 label='NOT NULL'
                 checked={field.allowNull === false}
-                onChange={(isChecked) =>
-                  updateFieldProps('allowNull', !isChecked, idx)
-                }
+                onChange={isChecked => updateFieldProps('allowNull', !isChecked, idx)}
               />
               <Checkbox
                 label='PRIMARY KEY'
                  checked={field.primaryKey}
-                 onChange={(isChecked) =>
+                 onChange={isChecked =>
                    updateFieldProps('primaryKey', isChecked, idx)
                  }
               />
               <Checkbox
                 label='AUTOINCREMENT'
                 checked={field.autoIncrement}
-                onChange={(isChecked) =>
-                  updateFieldProps('autoIncrement', isChecked, idx)
-                }
+                onChange={isChecked => updateFieldProps('autoIncrement', isChecked, idx)}
                 />
               <Input
                 value={field.default || ''}
@@ -147,13 +141,13 @@ class Field extends Component {
             Validation
               <Input
                 value={field.validate.is || ''}
-                onChange={evt => updateFieldValidation('is', evt.target.value, idx)}
+                onChange={value => updateFieldValidation('is', value, idx)}
                 type='text'
                 hint='is (/^[a-z]+$/i)'
               />
               <Input
                 value={field.validate.contains  || ''}
-                onChange={evt => updateFieldValidation('contains', evt.target.value, idx)}
+                onChange={value => updateFieldValidation('contains', value, idx)}
                 type='text'
                 hint='contains'
               />
@@ -167,7 +161,7 @@ class Field extends Component {
                 <Checkbox
                   label='isUrl'
                   checked={field.validate.isUrl || false}
-                  onChange={(isChecked) => updateFieldValidation('isUrl', isChecked, idx)}
+                  onChange={isChecked => updateFieldValidation('isUrl', isChecked, idx)}
                 />
               </div>
 
@@ -176,21 +170,21 @@ class Field extends Component {
               <div>
                 <Input
                   value={field.validate.min || ''}
-                  onChange={evt => updateFieldValidation('min', evt.target.value, idx)}
+                  onChange={value => updateFieldValidation('min', value, idx)}
                   type='text'
                   hint='min'
                 />
                 <Input
                   value={field.validate.max || ''}
-                  onChange={evt => updateFieldValidation('max', evt.target.value, idx)}
+                  onChange={value => updateFieldValidation('max', value, idx)}
                   type='text'
                   hint='max'
                 />
               </div>
             )}
-          </CardActions>
+          </div>
         }
-      </Card>
+      </div>
     )
   }
 }
