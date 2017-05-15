@@ -1,21 +1,44 @@
+const path = require('path')
+
 module.exports = {
-  entry: './browser/index.js',
+  entry: './src/index.js',
   output: {
-    path: __dirname,
-    filename: './public/bundle.js'
+    filename: 'app.js',
+    path: path.resolve(__dirname, 'dist')
   },
-  context: __dirname,
-  devtool: 'source-map',
+  resolve: {
+    extensions: ['.js', '.json', '.css']
+  },
+  devtool: 'eval-source-map',
   module: {
-    loaders: [
+    rules: [
       {
-        test: /\.js$/,
-        exclude: '/node_modules',
+        test: /\.js?$/,
         loader: 'babel-loader',
-        query: {
-          presets: [ 'react', 'es2015', 'stage-0']
+        options: {
+          presets: [
+            ['es2015', { modules: false }],
+            'stage-2',
+            'react'
+          ]
         }
-      }
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              sourceMap: true,
+              importLoaders: 1,
+              localIdentName: '[name]--[local]--[hash:base64:8]'
+            }
+          },
+          'postcss-loader' // has separate config, see postcss.config.js nearby
+        ]
+      },
     ]
   }
 }
